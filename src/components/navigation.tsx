@@ -26,6 +26,12 @@ export function Navigation() {
           >
             Gallery
           </Link>
+          <Link 
+            href="/test" 
+            className={`text-sm ${pathname === '/test' ? 'text-white' : 'text-zinc-400 hover:text-white'}`}
+          >
+            API Test
+          </Link>
         </div>
       </div>
     </nav>
