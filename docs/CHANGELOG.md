@@ -21,7 +21,11 @@
 - Updated Groq model from mixtral-8x7b-32768 to llama3-70b-8192 (@dsa157)
 - Fixed API base URL configuration in src/config/ai.ts
 - Added dangerouslyAllowBrowser flag for Groq client
+- Updated message format to match Groq API requirements (@dsa157)
+- Removed unsupported id field from API requests
+- Added name field to ChatMessage type
 
 ### Fixed
 - Resolved environment variable loading for client-side usage
 - Corrected API endpoint path duplication issue
+- Resolved 400 error from Groq API about unsupported message fields

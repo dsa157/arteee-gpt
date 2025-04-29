@@ -10,14 +10,24 @@ export function useChat() {
   const sendMessage = useCallback(async (content: string) => {
     setIsLoading(true);
     try {
-      const userMessage: ChatMessage = { role: 'user', content };
-      const newMessages = [...messages, userMessage];
+      const userMessage = { 
+        role: 'user' as const, 
+        content 
+      };
       
-      const assistantMessage = await client.chat(newMessages);
-      setMessages([...newMessages, { 
-        role: 'assistant', 
-        content: assistantMessage 
-      }]);
+      const assistantContent = await client.chat([
+        ...messages.map(m => ({ role: m.role, content: m.content })),
+        userMessage
+      ]);
+      
+      setMessages([
+        ...messages,
+        userMessage,
+        { 
+          role: 'assistant' as const,
+          content: assistantContent
+        }
+      ]);
     } finally {
       setIsLoading(false);
     }
